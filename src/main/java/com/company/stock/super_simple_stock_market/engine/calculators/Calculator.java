@@ -1,12 +1,10 @@
 package com.company.stock.super_simple_stock_market.engine.calculators;
 
-import java.util.concurrent.ExecutorService;
 import java.util.function.Function;
 
 import com.company.stock.super_simple_stock_market.engine.data_types.ResultData;
 
 public abstract class Calculator<I, O> implements Function<I, ResultData<O>> {
-	private ExecutorService executorService;
 
 	public ResultData<O> apply(I inputData) {
 		ResultData<O> r;
@@ -40,13 +38,4 @@ public abstract class Calculator<I, O> implements Function<I, ResultData<O>> {
 			throw new IllegalArgumentException(valueName + " is zero");
 		}
 	}
-
-	public ExecutorService getExecutorService() {
-		return executorService;
-	}
-
-	public void setExecutorService(ExecutorService executorService) {
-		this.executorService = executorService;
-	}
-
 }

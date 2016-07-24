@@ -1,9 +1,5 @@
 package com.company.stock.super_simple_stock_market;
 
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.Map;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -29,18 +25,24 @@ public class AppConfig {
 		return engine;
 	}
 
+	@Bean
 	public Calculator<StockAndPrice, Double> calculatorDividendYield() {
 		return new CalculatorDividendYield();
 	}
 	
+	@Bean
 	public Calculator<StockAndPrice, Double> calculatorPeRatio() {
 		return new CalculatorPeRatio();
 	}
 	
+	@Bean
 	public Calculator<StockAndCollectionOfTradesAndInterval, Double> calculatorVolumeWeightedStockPrice() {
-		return new CalculatorVolumeWeightedStockPrice();
+		CalculatorVolumeWeightedStockPrice calculator = new CalculatorVolumeWeightedStockPrice();
+		
+		return calculator;
 	}
 	
+	@Bean
 	public Calculator<CollectionOfTrades, Double> calculatorGbceAllShareIndex() {
 		return new CalculatorGbceAllShareIndex();
 	}
