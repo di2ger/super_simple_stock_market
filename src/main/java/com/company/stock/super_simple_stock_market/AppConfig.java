@@ -7,7 +7,6 @@ import java.util.Map;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.company.stock.super_simple_stock_market.engine.CalculationType;
 import com.company.stock.super_simple_stock_market.engine.Engine;
 import com.company.stock.super_simple_stock_market.engine.calculators.Calculator;
 import com.company.stock.super_simple_stock_market.engine.calculators.CalculatorDividendYield;
@@ -23,19 +22,11 @@ public class AppConfig {
 	@Bean
 	public Engine engine() {
 		Engine engine = new Engine();
-		engine.setCalculators(calculators());
+		engine.setCalculatorDividendYield(calculatorDividendYield());
+		engine.setCalculatorPeRatio(calculatorPeRatio());
+		engine.setCalculatorVolumeWeightedStockPrice(calculatorVolumeWeightedStockPrice());
+		engine.setCalculatorGbceAllShareIndex(calculatorGbceAllShareIndex());
 		return engine;
-	}
-
-	@SuppressWarnings("rawtypes")
-	public Map<CalculationType, Calculator> calculators() {
-		Map<CalculationType, Calculator> map = new EnumMap<>(CalculationType.class);
-		map.put(CalculationType.DIVIDEND_YIELD, calculatorDividendYield());
-		map.put(CalculationType.PE_RATIO, calculatorPeRatio());
-		map.put(CalculationType.VOLUME_WEIGHTED_STOCK_PRICE, calculatorVolumeWeightedStockPrice());
-		map.put(CalculationType.GBCE_ALL_SHARE_INDEX, calculatorGbceAllShareIndex());
-
-		return Collections.unmodifiableMap(map);
 	}
 
 	public Calculator<StockAndPrice, Double> calculatorDividendYield() {
