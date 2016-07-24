@@ -28,7 +28,6 @@ public class AppConfig {
 	}
 
 	@SuppressWarnings("rawtypes")
-	@Bean
 	public Map<CalculationType, Calculator> calculators() {
 		Map<CalculationType, Calculator> map = new EnumMap<>(CalculationType.class);
 		map.put(CalculationType.DIVIDEND_YIELD, calculatorDividendYield());
@@ -39,22 +38,18 @@ public class AppConfig {
 		return Collections.unmodifiableMap(map);
 	}
 
-	@Bean
 	public Calculator<StockAndPrice, Double> calculatorDividendYield() {
 		return new CalculatorDividendYield();
 	}
 	
-	@Bean
 	public Calculator<StockAndPrice, Double> calculatorPeRatio() {
 		return new CalculatorPeRatio();
 	}
 	
-	@Bean
 	public Calculator<StockAndCollectionOfTradesAndInterval, Double> calculatorVolumeWeightedStockPrice() {
 		return new CalculatorVolumeWeightedStockPrice();
 	}
 	
-	@Bean
 	public Calculator<CollectionOfTrades, Double> calculatorGbceAllShareIndex() {
 		return new CalculatorGbceAllShareIndex();
 	}

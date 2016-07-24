@@ -14,10 +14,10 @@ public class CalculatorDividendYield extends Calculator<StockAndPrice, Double> {
 		Integer price = inputData.getPrice();
 		ResultData<Double> resultData = new ResultData<>();
 		throwIfZero(price, "price");
-		if (stock.getType().equals(StockType.COMMON)) {
+		if (stock.getType() == StockType.COMMON) {
 			throwIfNull(stock.getLastDividend(), "Last Dividend");
 			resultData.setResult(1d*stock.getLastDividend()/price);
-		} else if (stock.getType().equals(StockType.PREFERRED)) {
+		} else if (stock.getType() == StockType.PREFERRED) {
 			StockPreferred stockPreferred = (StockPreferred)stock;
 			throwIfNull(stockPreferred.getFixedDividend(), "Fixed Dividend");
 			throwIfNull(stockPreferred.getParValue(), "Par Value");

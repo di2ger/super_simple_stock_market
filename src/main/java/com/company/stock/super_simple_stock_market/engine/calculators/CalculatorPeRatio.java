@@ -14,10 +14,10 @@ public class CalculatorPeRatio extends Calculator<StockAndPrice, Double> {
 		Integer price = inputData.getPrice();
 		ResultData<Double> resultData = new ResultData<>();
 		throwIfNull(price, "price");
-		if (stock.getType().equals(StockType.COMMON)) {
+		if (stock.getType() == StockType.COMMON) {
 			throwIfZero(stock.getLastDividend(), "Last Dividend");
 			resultData.setResult(1d*price/stock.getLastDividend());
-		} else if (stock.getType().equals(StockType.PREFERRED)) {
+		} else if (stock.getType() == StockType.PREFERRED) {
 			StockPreferred stockPreferred = (StockPreferred)stock;
 			throwIfZero(stockPreferred.getFixedDividend(), "Fixed Dividend");
 			throwIfZero(stockPreferred.getParValue(), "Par Value");

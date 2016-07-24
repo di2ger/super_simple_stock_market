@@ -1,8 +1,9 @@
 package com.company.stock.super_simple_stock_market;
 
-import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import javax.naming.ConfigurationException;
 
@@ -51,7 +52,7 @@ public class EngineTest {
 	@Test
 	public void allCalculatorsAreSet() {
 		// Arrays.asList is wrapped in ArrayList because it returns array without removeAll method support
-		List<CalculationType> calculationTypes = new ArrayList<>(Arrays.asList(CalculationType.values()));
+		Set<CalculationType> calculationTypes = EnumSet.allOf(CalculationType.class);
 		calculationTypes.removeAll(engine.getCalculators().keySet());
 		Assert.assertTrue("The following calculation types are not configured: " + calculationTypes,
 				calculationTypes.isEmpty());
