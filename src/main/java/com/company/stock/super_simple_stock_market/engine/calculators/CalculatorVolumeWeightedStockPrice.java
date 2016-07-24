@@ -12,6 +12,10 @@ public class CalculatorVolumeWeightedStockPrice extends Calculator<StockAndColle
 
 	@Override
 	public ResultData<Double> calculate(StockAndCollectionOfTradesAndInterval inputData) {
+		if (inputData.getInterval() == null) {
+			throw new IllegalArgumentException("Interval is not set");
+		}
+		
 		AtomicLong runningSumPriceByQuantity = new AtomicLong(0);
 		AtomicLong runningSumQuantity = new AtomicLong(0);
 		
@@ -19,8 +23,10 @@ public class CalculatorVolumeWeightedStockPrice extends Calculator<StockAndColle
 		
 		inputData.getTrades()
 				.parallelStream()
-				.filter(trade -> trade.getUnit().equals(inputData.getStock()))
-				.filter(trade -> datesDiffInSeconds(trade.getTimestamp(), currentTime) <= inputData.getInterval())
+				.filter(trade -> trade.getStock() != null
+						&& trade.getStock().equals(inputData.getStock()))
+				.filter(trade -> trade.getTimestamp() != null 
+						&& datesDiffInSeconds(trade.getTimestamp(), currentTime) <= inputData.getInterval())
 				.forEach(trade -> {
 					runningSumPriceByQuantity.addAndGet(trade.getPrice()*trade.getQuantity());
 					runningSumQuantity.addAndGet(trade.getQuantity());

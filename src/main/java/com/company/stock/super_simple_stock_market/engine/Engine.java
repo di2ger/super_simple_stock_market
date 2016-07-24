@@ -1,7 +1,7 @@
 package com.company.stock.super_simple_stock_market.engine;
 
-import java.util.Queue;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.company.stock.super_simple_stock_market.engine.calculators.Calculator;
 import com.company.stock.super_simple_stock_market.engine.data_types.CollectionOfTrades;
@@ -16,8 +16,7 @@ public class Engine {
 	private Calculator<StockAndCollectionOfTradesAndInterval, Double> calculatorVolumeWeightedStockPrice;
 	private Calculator<CollectionOfTrades, Double> calculatorGbceAllShareIndex;
 	
-	// Concurrency supported for adding trades from several threads
-	private final Queue<Trade> trades = new ConcurrentLinkedQueue<>();
+	private final List<Trade> trades = new ArrayList<>();
 	
 	public ResultData<Double> calculateDividendYield (StockAndPrice input) {
 		return calculatorDividendYield.apply(input);
@@ -37,7 +36,7 @@ public class Engine {
 
 	// Plain getters and setters from this point
 	
-	public Queue<Trade> getTrades() {
+	public List<Trade> getTrades() {
 		return trades;
 	}
 

@@ -10,10 +10,10 @@ public class Trade {
 	// in pennies
 	private Integer price;
 	
-	public Stock getUnit() {
+	public Stock getStock() {
 		return stock;
 	}
-	public void setUnit(Stock unit) {
+	public void setStock(Stock unit) {
 		this.stock = unit;
 	}
 	public Date getTimestamp() {
