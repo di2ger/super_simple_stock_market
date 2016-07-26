@@ -1,9 +1,9 @@
-package com.company.stock.super_simple_stock_market.engine.data_types;
+package com.company.stock.market.engine.data_types;
 
 import java.util.Collection;
 
-import com.company.stock.super_simple_stock_market.model.Stock;
-import com.company.stock.super_simple_stock_market.model.Trade;
+import com.company.stock.market.model.Stock;
+import com.company.stock.market.model.Trade;
 
 public class StockAndCollectionOfTradesAndInterval {
 	private Stock stock; 

@@ -1,7 +1,7 @@
-package com.company.stock.super_simple_stock_market.model;
+package com.company.stock.market.model;
 
 public abstract class Stock {
-	private StockSymbol symbol;
+	private String symbol;
 	// in pennies
 	private Integer lastDividend;
 	// in pennies
@@ -9,10 +9,10 @@ public abstract class Stock {
 	
 	public abstract StockType getType();
 	
-	public StockSymbol getSymbol() {
+	public String getSymbol() {
 		return symbol;
 	}
-	public void setSymbol(StockSymbol symbol) {
+	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
 	public Integer getLastDividend() {
@@ -51,11 +51,11 @@ public abstract class Stock {
 				return false;
 		} else if (!parValue.equals(other.parValue))
 			return false;
-		if (symbol != other.symbol)
+		if (symbol == null) {
+			if (other.symbol != null)
+				return false;
+		} else if (!symbol.equals(other.symbol))
 			return false;
 		return true;
 	}
-	
-	
-
 }

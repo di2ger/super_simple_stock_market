@@ -1,10 +1,10 @@
-package com.company.stock.super_simple_stock_market.engine.calculators;
+package com.company.stock.market.engine.calculators;
 
-import com.company.stock.super_simple_stock_market.engine.data_types.ResultData;
-import com.company.stock.super_simple_stock_market.engine.data_types.StockAndPrice;
-import com.company.stock.super_simple_stock_market.model.Stock;
-import com.company.stock.super_simple_stock_market.model.StockPreferred;
-import com.company.stock.super_simple_stock_market.model.StockType;
+import com.company.stock.market.engine.data_types.ResultData;
+import com.company.stock.market.engine.data_types.StockAndPrice;
+import com.company.stock.market.model.Stock;
+import com.company.stock.market.model.StockPreferred;
+import com.company.stock.market.model.StockType;
 
 public class CalculatorPeRatio extends Calculator<StockAndPrice, Double> {
 

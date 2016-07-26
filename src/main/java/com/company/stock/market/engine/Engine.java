@@ -1,14 +1,14 @@
-package com.company.stock.super_simple_stock_market.engine;
+package com.company.stock.market.engine;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.company.stock.super_simple_stock_market.engine.calculators.Calculator;
-import com.company.stock.super_simple_stock_market.engine.data_types.CollectionOfTrades;
-import com.company.stock.super_simple_stock_market.engine.data_types.ResultData;
-import com.company.stock.super_simple_stock_market.engine.data_types.StockAndCollectionOfTradesAndInterval;
-import com.company.stock.super_simple_stock_market.engine.data_types.StockAndPrice;
-import com.company.stock.super_simple_stock_market.model.Trade;
+import com.company.stock.market.engine.calculators.Calculator;
+import com.company.stock.market.engine.data_types.CollectionOfTrades;
+import com.company.stock.market.engine.data_types.ResultData;
+import com.company.stock.market.engine.data_types.StockAndCollectionOfTradesAndInterval;
+import com.company.stock.market.engine.data_types.StockAndPrice;
+import com.company.stock.market.model.Trade;
 
 public class Engine {
 	private Calculator<StockAndPrice, Double> calculatorDividendYield;

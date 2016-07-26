@@ -1,6 +1,6 @@
-package com.company.stock.super_simple_stock_market.engine.data_types;
+package com.company.stock.market.engine.data_types;
 
-import com.company.stock.super_simple_stock_market.model.Stock;
+import com.company.stock.market.model.Stock;
 
 public class StockAndPrice {
 	private Stock stock;

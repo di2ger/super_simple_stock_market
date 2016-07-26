@@ -1,11 +1,11 @@
-package com.company.stock.super_simple_stock_market.engine.calculators;
+package com.company.stock.market.engine.calculators;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import com.company.stock.super_simple_stock_market.engine.data_types.PriceByQuantityAndQuantity;
-import com.company.stock.super_simple_stock_market.engine.data_types.ResultData;
-import com.company.stock.super_simple_stock_market.engine.data_types.StockAndCollectionOfTradesAndInterval;
+import com.company.stock.market.engine.data_types.PriceByQuantityAndQuantity;
+import com.company.stock.market.engine.data_types.ResultData;
+import com.company.stock.market.engine.data_types.StockAndCollectionOfTradesAndInterval;
 
 public class CalculatorVolumeWeightedStockPrice extends Calculator<StockAndCollectionOfTradesAndInterval, Double> {
 
