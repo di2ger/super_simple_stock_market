@@ -1,24 +1,24 @@
 package com.company.stock.super_simple_stock_market.engine.data_types;
 
 public class PriceByQuantityAndQuantity {
-	private Long priceByQuantity;
-	private Long quantity;
+	private long priceByQuantity;
+	private long quantity;
 	
-	public PriceByQuantityAndQuantity(Long priceByQuantity, Long quantity) {
+	public PriceByQuantityAndQuantity(long priceByQuantity, long quantity) {
 		this.priceByQuantity = priceByQuantity;
 		this.quantity = quantity;
 	}
 	
-	public Long getPriceByQuantity() {
+	public long getPriceByQuantity() {
 		return priceByQuantity;
 	}
-	public void setPriceByQuantity(Long priceByQuantity) {
+	public void setPriceByQuantity(long priceByQuantity) {
 		this.priceByQuantity = priceByQuantity;
 	}
-	public Long getQuantity() {
+	public long getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(Long quantity) {
+	public void setQuantity(long quantity) {
 		this.quantity = quantity;
 	}
 

@@ -23,9 +23,9 @@ public class CalculatorVolumeWeightedStockPrice extends Calculator<StockAndColle
 						&& trade.getStock().equals(inputData.getStock()))
 				.filter(trade -> trade.getTimestamp() != null 
 						&& datesDiffInSeconds(trade.getTimestamp(), currentTime) <= inputData.getInterval())
-				.map(trade -> new PriceByQuantityAndQuantity(1l*trade.getPrice()*trade.getQuantity(),
-						1l*trade.getQuantity()))
-				.reduce(new PriceByQuantityAndQuantity(0l, 0l), (a, b) -> 
+				.map(trade -> new PriceByQuantityAndQuantity(1L*trade.getPrice()*trade.getQuantity(),
+						1L*trade.getQuantity()))
+				.reduce(new PriceByQuantityAndQuantity(0L, 0L), (a, b) -> 
 						new PriceByQuantityAndQuantity(a.getPriceByQuantity() + b.getPriceByQuantity(),
 						a.getQuantity() + b.getQuantity()));
 

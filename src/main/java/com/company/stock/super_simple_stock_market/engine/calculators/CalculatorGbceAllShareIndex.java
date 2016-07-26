@@ -30,7 +30,7 @@ public class CalculatorGbceAllShareIndex extends Calculator<CollectionOfTrades, 
 					runningSums.getRunningSumQuantity().addAndGet(trade.getQuantity());
 				});
 
-		Double multiplication = map.values()
+		double multiplication = map.values()
 				.parallelStream()
 				.peek(runningSums -> {
 					// In current implementation it should newer throw error, but implementation might change
