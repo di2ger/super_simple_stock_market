@@ -13,6 +13,8 @@ public abstract class Calculator<I, O> implements Function<I, ResultData<O>> {
 		} catch (Exception e) {
 			r = new ResultData<O>();
 			r.setErrorDescription(e.toString());
+			System.out.println("Calculation error: " + e);
+			e.printStackTrace();
 		}
 		return r;
 	}
@@ -26,6 +28,10 @@ public abstract class Calculator<I, O> implements Function<I, ResultData<O>> {
 	}
 	
 	public void throwIfZero(Integer valueToCheck, String valueName) {
+		throwIfZero(new Long(valueToCheck), valueName);
+	}
+	
+	public void throwIfZero(Long valueToCheck, String valueName) {
 		throwIfNull(valueToCheck, valueName);
 		if (valueToCheck == 0) {
 			throw new IllegalArgumentException(valueName + " is zero");
@@ -36,6 +42,13 @@ public abstract class Calculator<I, O> implements Function<I, ResultData<O>> {
 		throwIfNull(valueToCheck, valueName);
 		if (Math.abs(valueToCheck) < Double.MIN_NORMAL) {
 			throw new IllegalArgumentException(valueName + " is zero");
+		}
+	}
+	
+	public void throwIfNotPositive(Integer valueToCheck, String valueName) {
+		throwIfNull(valueToCheck, valueName);
+		if (valueToCheck <= 0) {
+			throw new IllegalArgumentException(valueName + " is not positive");
 		}
 	}
 }

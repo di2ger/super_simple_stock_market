@@ -16,11 +16,13 @@ import org.springframework.test.context.support.DirtiesContextTestExecutionListe
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import com.company.stock.super_simple_stock_market.engine.Engine;
+import com.company.stock.super_simple_stock_market.engine.data_types.CollectionOfTrades;
 import com.company.stock.super_simple_stock_market.engine.data_types.ResultData;
 import com.company.stock.super_simple_stock_market.engine.data_types.StockAndCollectionOfTradesAndInterval;
 import com.company.stock.super_simple_stock_market.engine.data_types.StockAndPrice;
 import com.company.stock.super_simple_stock_market.model.Stock;
 import com.company.stock.super_simple_stock_market.model.StockCommon;
+import com.company.stock.super_simple_stock_market.model.StockPreferred;
 import com.company.stock.super_simple_stock_market.model.Trade;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -83,6 +85,34 @@ public class EngineTest {
 		Assert.assertNull("Error description is not empty: " + result.getErrorDescription(),
 				result.getErrorDescription());
 		Assert.assertEquals("Result is wrong", 2.98, result.getResult(), 1e-32);
+	}
+	
+	@Test
+	public void calculateGbceAllShareIndexTest() {
+		CollectionOfTrades input = new CollectionOfTrades();
+		Stock stock1 = new StockCommon();
+		Stock stock2 = new StockPreferred();
+		for (int i = 0; i < 100; i++) {
+			Trade trade = new Trade();
+			if (i % 2 == 0) {
+				trade.setStock(stock1);
+				trade.setQuantity(1);
+				trade.setPrice(100);
+			} else {
+				trade.setStock(stock2);
+				trade.setQuantity(2);
+				trade.setPrice(200);
+			}
+			engine.getTrades().add(trade);
+		}
+		input.setTrades(engine.getTrades());
+		Date start = new Date();
+		ResultData<Double> result = engine.calculateGbceAllShareIndex(input);
+		Date finish = new Date();
+		System.out.println("Duration is " + (finish.getTime() - start.getTime()) + " ms");
+		Assert.assertNull("Error description is not empty: " + result.getErrorDescription(),
+				result.getErrorDescription());
+		Assert.assertEquals("Result is wrong", 1.0, result.getResult(), 1e-32);
 	}
 	
 	

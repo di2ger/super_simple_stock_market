@@ -11,3 +11,5 @@ Formula for P/E Ratio is unclear - Dividend has not been defined, so it's been d
 Calculate Volume Weighted Stock Price - it's been decided that all provided trades could be for different stocks, so there is a need to filter trades.
 
 Engine holds general calculators which allows configuration of multiple implementations of the same calculation types.
+
+During calculation of GBCE All Share Index we assume that all prices and quantities of trades are positive.

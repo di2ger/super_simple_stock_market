@@ -1,12 +1,11 @@
 package com.company.stock.super_simple_stock_market.engine.calculators;
 
-import com.company.stock.super_simple_stock_market.engine.data_types.StockAndCollectionOfTradesAndInterval;
-
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicLong;
 
+import com.company.stock.super_simple_stock_market.engine.data_types.PriceByQuantityAndQuantity;
 import com.company.stock.super_simple_stock_market.engine.data_types.ResultData;
+import com.company.stock.super_simple_stock_market.engine.data_types.StockAndCollectionOfTradesAndInterval;
 
 public class CalculatorVolumeWeightedStockPrice extends Calculator<StockAndCollectionOfTradesAndInterval, Double> {
 
@@ -16,26 +15,23 @@ public class CalculatorVolumeWeightedStockPrice extends Calculator<StockAndColle
 			throw new IllegalArgumentException("Interval is not set");
 		}
 		
-		AtomicLong runningSumPriceByQuantity = new AtomicLong(0);
-		AtomicLong runningSumQuantity = new AtomicLong(0);
-		
 		Date currentTime = new Date();
 		
-		inputData.getTrades()
+		PriceByQuantityAndQuantity p = inputData.getTrades()
 				.parallelStream()
 				.filter(trade -> trade.getStock() != null
 						&& trade.getStock().equals(inputData.getStock()))
 				.filter(trade -> trade.getTimestamp() != null 
 						&& datesDiffInSeconds(trade.getTimestamp(), currentTime) <= inputData.getInterval())
-				.forEach(trade -> {
-					runningSumPriceByQuantity.addAndGet(trade.getPrice()*trade.getQuantity());
-					runningSumQuantity.addAndGet(trade.getQuantity());
-				});
-		if (runningSumQuantity.get() == 0) {
-			throw new IllegalArgumentException("Zero quantity");
-		}
+				.map(trade -> new PriceByQuantityAndQuantity(1l*trade.getPrice()*trade.getQuantity(),
+						1l*trade.getQuantity()))
+				.reduce(new PriceByQuantityAndQuantity(0l, 0l), (a, b) -> 
+						new PriceByQuantityAndQuantity(a.getPriceByQuantity() + b.getPriceByQuantity(),
+						a.getQuantity() + b.getQuantity()));
+
+		throwIfZero(p.getQuantity(), "Quantity sum");
 		ResultData<Double> res = new ResultData<>();
-		res.setResult(1d*runningSumPriceByQuantity.get()/runningSumQuantity.get());
+		res.setResult(1d*p.getPriceByQuantity()/p.getQuantity());
 		return res;
 	}
 	
