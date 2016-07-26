@@ -1,16 +1,19 @@
 package com.company.stock.market.engine;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.company.stock.market.engine.calculators.Calculator;
-import com.company.stock.market.engine.data_types.CollectionOfTrades;
-import com.company.stock.market.engine.data_types.ResultData;
-import com.company.stock.market.engine.data_types.StockAndCollectionOfTradesAndInterval;
-import com.company.stock.market.engine.data_types.StockAndPrice;
+import com.company.stock.market.engine.data.wrappers.CollectionOfTrades;
+import com.company.stock.market.engine.data.wrappers.StockAndCollectionOfTradesAndInterval;
+import com.company.stock.market.engine.data.wrappers.StockAndPrice;
+import com.company.stock.market.model.Engine;
+import com.company.stock.market.model.ResultData;
+import com.company.stock.market.model.Stock;
 import com.company.stock.market.model.Trade;
 
-public class Engine {
+public class EngineImpl implements Engine {
 	private Calculator<StockAndPrice, Double> calculatorDividendYield;
 	private Calculator<StockAndPrice, Double> calculatorPeRatio;
 	private Calculator<StockAndCollectionOfTradesAndInterval, Double> calculatorVolumeWeightedStockPrice;
@@ -18,19 +21,31 @@ public class Engine {
 	
 	private final List<Trade> trades = new ArrayList<>();
 	
-	public ResultData<Double> calculateDividendYield (StockAndPrice input) {
+	public ResultData<Double> calculateDividendYield (Stock stock, long price) {
+		StockAndPrice input = new StockAndPrice();
+		input.setStock(stock);
+		input.setPrice(price);
 		return calculatorDividendYield.apply(input);
 	}
 	
-	public ResultData<Double> calculatePeRatio (StockAndPrice input) {
+	public ResultData<Double> calculatePeRatio (Stock stock, long price) {
+		StockAndPrice input = new StockAndPrice();
+		input.setStock(stock);
+		input.setPrice(price);
 		return calculatorPeRatio.apply(input);
 	}
 	
-	public ResultData<Double> calculateVolumeWeightedStockPrice (StockAndCollectionOfTradesAndInterval input) {
-		return calculatorVolumeWeightedStockPrice.apply(input);
+	public ResultData<Double> calculateVolumeWeightedStockPrice (Stock stock, Collection<Trade> trades, int interval) {
+		StockAndCollectionOfTradesAndInterval input = new StockAndCollectionOfTradesAndInterval();
+		input.setStock(stock);
+		input.setTrades(trades);
+		input.setInterval(interval);
+		return calculatorVolumeWeightedStockPrice.apply(input );
 	}
 	
-	public ResultData<Double> calculateGbceAllShareIndex (CollectionOfTrades input) {
+	public ResultData<Double> calculateGbceAllShareIndex (Collection<Trade> trades) {
+		CollectionOfTrades input = new CollectionOfTrades();
+		input.setTrades(trades);
 		return calculatorGbceAllShareIndex.apply(input);
 	}
 

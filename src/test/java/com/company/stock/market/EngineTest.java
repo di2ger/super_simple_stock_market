@@ -15,12 +15,9 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import com.company.stock.market.AppConfig;
-import com.company.stock.market.engine.Engine;
-import com.company.stock.market.engine.data_types.CollectionOfTrades;
-import com.company.stock.market.engine.data_types.ResultData;
-import com.company.stock.market.engine.data_types.StockAndCollectionOfTradesAndInterval;
-import com.company.stock.market.engine.data_types.StockAndPrice;
+import com.company.stock.market.engine.EngineImpl;
+import com.company.stock.market.model.Engine;
+import com.company.stock.market.model.ResultData;
 import com.company.stock.market.model.Stock;
 import com.company.stock.market.model.StockCommon;
 import com.company.stock.market.model.StockPreferred;
@@ -37,37 +34,50 @@ public class EngineTest {
 	private Engine engine;
 	
 	@Test
-	public void calculateDividendYieldTest() throws ConfigurationException {
-		StockAndPrice input = new StockAndPrice();
-		input.setPrice(100);
+	public void calculateDividendYieldCommonTest() throws ConfigurationException {
 		Stock stock = new StockCommon();
 		stock.setLastDividend(10);
-		input.setStock(stock);
-		ResultData<Double> result = engine.calculateDividendYield(input);
+		ResultData<Double> result = engine.calculateDividendYield(stock, 100);
 		Assert.assertNull("Error description is not empty: " + result.getErrorDescription(),
 				result.getErrorDescription());
 		Assert.assertEquals("Result is wrong", 10d/100, result.getResult(), 1e-32);
 	}
 	
 	@Test
-	public void calculatePeRatioTest() throws ConfigurationException {
-		StockAndPrice input = new StockAndPrice();
-		input.setPrice(100);
+	public void calculateDividendYieldPreferredTest() throws ConfigurationException {
+		StockPreferred stock = new StockPreferred();
+		stock.setFixedDividend(10);
+		stock.setParValue(50);
+		ResultData<Double> result = engine.calculateDividendYield(stock, 100);
+		Assert.assertNull("Error description is not empty: " + result.getErrorDescription(),
+				result.getErrorDescription());
+		Assert.assertEquals("Result is wrong", 5d/100, result.getResult(), 1e-32);
+	}
+	
+	@Test
+	public void calculatePeRatioCommonTest() throws ConfigurationException {
 		Stock stock = new StockCommon();
 		stock.setLastDividend(10);
-		input.setStock(stock);
-		ResultData<Double> result = engine.calculatePeRatio(input);
+		ResultData<Double> result = engine.calculatePeRatio(stock, 100);
 		Assert.assertNull("Error description is not empty: " + result.getErrorDescription(),
 				result.getErrorDescription());
 		Assert.assertEquals("Result is wrong", 100d/10, result.getResult(), 1e-32);
 	}
 	
 	@Test
+	public void calculatePeRatioPreferredTest() throws ConfigurationException {
+		StockPreferred stock = new StockPreferred();
+		stock.setFixedDividend(10);
+		stock.setParValue(200);
+		ResultData<Double> result = engine.calculatePeRatio(stock, 100);
+		Assert.assertNull("Error description is not empty: " + result.getErrorDescription(),
+				result.getErrorDescription());
+		Assert.assertEquals("Result is wrong", 100d/20, result.getResult(), 1e-32);
+	}
+	
+	@Test
 	public void calculateVolumeWeightedStockPriceTest() throws ConfigurationException {
-		StockAndCollectionOfTradesAndInterval input = new StockAndCollectionOfTradesAndInterval();
-		input.setInterval(1);
 		Stock stock = new StockCommon();
-		input.setStock(stock);
 		Trade t1 = new Trade();
 		t1.setPrice(100);
 		t1.setQuantity(2);
@@ -80,9 +90,8 @@ public class EngineTest {
 		t2.setTimestamp(new Date());
 		t2.setStock(stock);
 		engine.getTrades().add(t2);
-		input.setTrades(engine.getTrades());
 
-		ResultData<Double> result = engine.calculateVolumeWeightedStockPrice(input);
+		ResultData<Double> result = engine.calculateVolumeWeightedStockPrice(stock, engine.getTrades(), 1);
 		Assert.assertNull("Error description is not empty: " + result.getErrorDescription(),
 				result.getErrorDescription());
 		Assert.assertEquals("Result is wrong", 2.98, result.getResult(), 1e-32);
@@ -90,7 +99,6 @@ public class EngineTest {
 	
 	@Test
 	public void calculateGbceAllShareIndexTest() {
-		CollectionOfTrades input = new CollectionOfTrades();
 		Stock stock1 = new StockCommon();
 		Stock stock2 = new StockPreferred();
 		for (int i = 0; i < 100; i++) {
@@ -106,24 +114,13 @@ public class EngineTest {
 			}
 			engine.getTrades().add(trade);
 		}
-		input.setTrades(engine.getTrades());
 		Date start = new Date();
-		ResultData<Double> result = engine.calculateGbceAllShareIndex(input);
+		ResultData<Double> result = engine.calculateGbceAllShareIndex(engine.getTrades());
 		Date finish = new Date();
 		System.out.println("Duration is " + (finish.getTime() - start.getTime()) + " ms");
 		Assert.assertNull("Error description is not empty: " + result.getErrorDescription(),
 				result.getErrorDescription());
 		Assert.assertEquals("Result is wrong", 1.0, result.getResult(), 1e-32);
-	}
-	
-	
-	@Test
-	public void allCalculatorsAreSet() {
-		Assert.assertNotNull("CalculatorDividendYield is not configured", engine.getCalculatorDividendYield());
-		Assert.assertNotNull("CalculatorPeRatio is not configured", engine.getCalculatorPeRatio());
-		Assert.assertNotNull("CalculatorVolumeWeightedStockPrice is not configured",
-				engine.getCalculatorVolumeWeightedStockPrice());
-		Assert.assertNotNull("CalculatorGbceAllShareIndex is not configured", engine.getCalculatorGbceAllShareIndex());
 	}
 	
 

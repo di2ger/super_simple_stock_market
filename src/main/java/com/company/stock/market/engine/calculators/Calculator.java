@@ -2,7 +2,7 @@ package com.company.stock.market.engine.calculators;
 
 import java.util.function.Function;
 
-import com.company.stock.market.engine.data_types.ResultData;
+import com.company.stock.market.model.ResultData;
 
 public abstract class Calculator<I, O> implements Function<I, ResultData<O>> {
 
@@ -27,12 +27,7 @@ public abstract class Calculator<I, O> implements Function<I, ResultData<O>> {
 		}
 	}
 	
-	public void throwIfZero(Integer valueToCheck, String valueName) {
-		throwIfZero(new Long(valueToCheck), valueName);
-	}
-	
-	public void throwIfZero(Long valueToCheck, String valueName) {
-		throwIfNull(valueToCheck, valueName);
+	public void throwIfZero(long valueToCheck, String valueName) {
 		if (valueToCheck == 0) {
 			throw new IllegalArgumentException(valueName + " is zero");
 		}
@@ -45,8 +40,7 @@ public abstract class Calculator<I, O> implements Function<I, ResultData<O>> {
 		}
 	}
 	
-	public void throwIfNotPositive(Integer valueToCheck, String valueName) {
-		throwIfNull(valueToCheck, valueName);
+	public void throwIfNotPositive(long valueToCheck, String valueName) {
 		if (valueToCheck <= 0) {
 			throw new IllegalArgumentException(valueName + " is not positive");
 		}

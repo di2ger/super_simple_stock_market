@@ -3,18 +3,14 @@ package com.company.stock.market.engine.calculators;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import com.company.stock.market.engine.data_types.PriceByQuantityAndQuantity;
-import com.company.stock.market.engine.data_types.ResultData;
-import com.company.stock.market.engine.data_types.StockAndCollectionOfTradesAndInterval;
+import com.company.stock.market.engine.data.wrappers.PriceByQuantityAndQuantity;
+import com.company.stock.market.engine.data.wrappers.StockAndCollectionOfTradesAndInterval;
+import com.company.stock.market.model.ResultData;
 
 public class CalculatorVolumeWeightedStockPrice extends Calculator<StockAndCollectionOfTradesAndInterval, Double> {
 
 	@Override
 	public ResultData<Double> calculate(StockAndCollectionOfTradesAndInterval inputData) {
-		if (inputData.getInterval() == null) {
-			throw new IllegalArgumentException("Interval is not set");
-		}
-		
 		Date currentTime = new Date();
 		
 		PriceByQuantityAndQuantity p = inputData.getTrades()
@@ -23,8 +19,8 @@ public class CalculatorVolumeWeightedStockPrice extends Calculator<StockAndColle
 						&& trade.getStock().equals(inputData.getStock()))
 				.filter(trade -> trade.getTimestamp() != null 
 						&& datesDiffInSeconds(trade.getTimestamp(), currentTime) <= inputData.getInterval())
-				.map(trade -> new PriceByQuantityAndQuantity(1L*trade.getPrice()*trade.getQuantity(),
-						1L*trade.getQuantity()))
+				.map(trade -> new PriceByQuantityAndQuantity(trade.getPrice()*trade.getQuantity(),
+						trade.getQuantity()))
 				.reduce(new PriceByQuantityAndQuantity(0L, 0L), (a, b) -> 
 						new PriceByQuantityAndQuantity(a.getPriceByQuantity() + b.getPriceByQuantity(),
 						a.getQuantity() + b.getQuantity()));

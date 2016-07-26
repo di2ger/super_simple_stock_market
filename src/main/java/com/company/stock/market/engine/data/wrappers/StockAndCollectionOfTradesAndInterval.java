@@ -1,4 +1,4 @@
-package com.company.stock.market.engine.data_types;
+package com.company.stock.market.engine.data.wrappers;
 
 import java.util.Collection;
 
@@ -9,7 +9,7 @@ public class StockAndCollectionOfTradesAndInterval {
 	private Stock stock; 
 	private Collection<Trade> trades;
 	// in seconds
-	private Integer interval;
+	private int interval;
 	
 	public Stock getStock() {
 		return stock;
@@ -23,10 +23,10 @@ public class StockAndCollectionOfTradesAndInterval {
 	public void setTrades(Collection<Trade> trades) {
 		this.trades = trades;
 	}
-	public Integer getInterval() {
+	public int getInterval() {
 		return interval;
 	}
-	public void setInterval(Integer interval) {
+	public void setInterval(int interval) {
 		this.interval = interval;
 	}
 }

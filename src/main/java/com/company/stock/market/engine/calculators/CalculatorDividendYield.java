@@ -1,31 +1,37 @@
 package com.company.stock.market.engine.calculators;
 
-import com.company.stock.market.engine.data_types.ResultData;
-import com.company.stock.market.engine.data_types.StockAndPrice;
+import com.company.stock.market.engine.data.wrappers.StockAndPrice;
+import com.company.stock.market.model.ResultData;
 import com.company.stock.market.model.Stock;
 import com.company.stock.market.model.StockPreferred;
 import com.company.stock.market.model.StockType;
 
 public class CalculatorDividendYield extends Calculator<StockAndPrice, Double> {
 
+	private Calculator<Stock, Double> calculatorDividend;
+
 	@Override
 	public ResultData<Double> calculate(StockAndPrice inputData) {
+		
 		Stock stock = inputData.getStock();
-		Integer price = inputData.getPrice();
+		long price = inputData.getPrice();
 		ResultData<Double> resultData = new ResultData<>();
+		
 		throwIfZero(price, "price");
-		if (stock.getType() == StockType.COMMON) {
-			throwIfNull(stock.getLastDividend(), "Last Dividend");
-			resultData.setResult(1d*stock.getLastDividend()/price);
-		} else if (stock.getType() == StockType.PREFERRED) {
-			StockPreferred stockPreferred = (StockPreferred)stock;
-			throwIfNull(stockPreferred.getFixedDividend(), "Fixed Dividend");
-			throwIfNull(stockPreferred.getParValue(), "Par Value");
-			resultData.setResult(1d*stockPreferred.getFixedDividend()*stockPreferred.getParValue()/(100d*price));
-		} else {
-			throw new IllegalArgumentException("Unknown Stock type: " + stock.getType());
+		ResultData<Double> dividend = calculatorDividend.apply(stock);
+		if (dividend.getErrorDescription() != null) {
+			throw new IllegalArgumentException("Dividend calculation error: " + dividend.getErrorDescription());
 		}
+		resultData.setResult(dividend.getResult()/price);
 		return resultData;
+	}
+
+	public Calculator<Stock, Double> getCalculatorDividend() {
+		return calculatorDividend;
+	}
+
+	public void setCalculatorDividend(Calculator<Stock, Double> calculatorDividend) {
+		this.calculatorDividend = calculatorDividend;
 	}
 
 }

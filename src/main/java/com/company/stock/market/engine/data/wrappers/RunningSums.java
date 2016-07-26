@@ -1,4 +1,4 @@
-package com.company.stock.market.engine.data_types;
+package com.company.stock.market.engine.data.wrappers;
 
 import java.util.concurrent.atomic.AtomicLong;
 

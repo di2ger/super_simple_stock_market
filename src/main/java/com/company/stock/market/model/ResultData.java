@@ -1,4 +1,4 @@
-package com.company.stock.market.engine.data_types;
+package com.company.stock.market.model;
 
 public class ResultData<T> {
 	private T result;

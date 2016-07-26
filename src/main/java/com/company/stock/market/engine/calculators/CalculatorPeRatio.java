@@ -1,31 +1,35 @@
 package com.company.stock.market.engine.calculators;
 
-import com.company.stock.market.engine.data_types.ResultData;
-import com.company.stock.market.engine.data_types.StockAndPrice;
+import com.company.stock.market.engine.data.wrappers.StockAndPrice;
+import com.company.stock.market.model.ResultData;
 import com.company.stock.market.model.Stock;
-import com.company.stock.market.model.StockPreferred;
-import com.company.stock.market.model.StockType;
 
 public class CalculatorPeRatio extends Calculator<StockAndPrice, Double> {
+	
+	private Calculator<Stock, Double> calculatorDividend;
 
 	@Override
 	public ResultData<Double> calculate(StockAndPrice inputData) {
+		
 		Stock stock = inputData.getStock();
-		Integer price = inputData.getPrice();
+		long price = inputData.getPrice();
 		ResultData<Double> resultData = new ResultData<>();
-		throwIfNull(price, "price");
-		if (stock.getType() == StockType.COMMON) {
-			throwIfZero(stock.getLastDividend(), "Last Dividend");
-			resultData.setResult(1d*price/stock.getLastDividend());
-		} else if (stock.getType() == StockType.PREFERRED) {
-			StockPreferred stockPreferred = (StockPreferred)stock;
-			throwIfZero(stockPreferred.getFixedDividend(), "Fixed Dividend");
-			throwIfZero(stockPreferred.getParValue(), "Par Value");
-			resultData.setResult(100d*price/(stockPreferred.getFixedDividend()*stockPreferred.getParValue()));
-		} else {
-			throw new IllegalArgumentException("Unknown Stock type: " + stock.getType());
+		
+		ResultData<Double> dividend = calculatorDividend.apply(stock);
+		if (dividend.getErrorDescription() != null) {
+			throw new IllegalArgumentException("Dividend calculation error: " + dividend.getErrorDescription());
 		}
+		throwIfZero(dividend.getResult(), "Dividend");
+		resultData.setResult(price/dividend.getResult());
 		return resultData;
+	}
+
+	public Calculator<Stock, Double> getCalculatorDividend() {
+		return calculatorDividend;
+	}
+
+	public void setCalculatorDividend(Calculator<Stock, Double> calculatorDividend) {
+		this.calculatorDividend = calculatorDividend;
 	}
 
 }

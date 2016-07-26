@@ -3,9 +3,9 @@ package com.company.stock.market.model;
 public abstract class Stock {
 	private String symbol;
 	// in pennies
-	private Integer lastDividend;
+	private long lastDividend;
 	// in pennies
-	private Integer parValue;
+	private long parValue;
 	
 	public abstract StockType getType();
 	
@@ -15,16 +15,16 @@ public abstract class Stock {
 	public void setSymbol(String symbol) {
 		this.symbol = symbol;
 	}
-	public Integer getLastDividend() {
+	public long getLastDividend() {
 		return lastDividend;
 	}
-	public void setLastDividend(Integer lastDividend) {
+	public void setLastDividend(long lastDividend) {
 		this.lastDividend = lastDividend;
 	}
-	public Integer getParValue() {
+	public long getParValue() {
 		return parValue;
 	}
-	public void setParValue(Integer parValue) {
+	public void setParValue(long parValue) {
 		this.parValue = parValue;
 	}
 
@@ -32,7 +32,7 @@ public abstract class Stock {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((parValue == null) ? 0 : parValue.hashCode());
+		result = prime * result + (int) (parValue ^ (parValue >>> 32));
 		result = prime * result + ((symbol == null) ? 0 : symbol.hashCode());
 		return result;
 	}
@@ -46,10 +46,7 @@ public abstract class Stock {
 		if (getClass() != obj.getClass())
 			return false;
 		Stock other = (Stock) obj;
-		if (parValue == null) {
-			if (other.parValue != null)
-				return false;
-		} else if (!parValue.equals(other.parValue))
+		if (parValue != other.parValue)
 			return false;
 		if (symbol == null) {
 			if (other.symbol != null)
@@ -58,4 +55,11 @@ public abstract class Stock {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Stock [symbol=" + symbol + ", lastDividend=" + lastDividend + ", parValue=" + parValue + "]";
+	}
+	
+	
 }
