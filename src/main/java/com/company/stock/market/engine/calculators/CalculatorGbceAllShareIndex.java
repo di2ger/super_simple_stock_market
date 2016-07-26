@@ -1,12 +1,12 @@
-package com.company.stock.super_simple_stock_market.engine.calculators;
+package com.company.stock.market.engine.calculators;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-import com.company.stock.super_simple_stock_market.engine.data_types.CollectionOfTrades;
-import com.company.stock.super_simple_stock_market.engine.data_types.ResultData;
-import com.company.stock.super_simple_stock_market.engine.data_types.RunningSums;
-import com.company.stock.super_simple_stock_market.model.Stock;
+import com.company.stock.market.engine.data_types.CollectionOfTrades;
+import com.company.stock.market.engine.data_types.ResultData;
+import com.company.stock.market.engine.data_types.RunningSums;
+import com.company.stock.market.model.Stock;
 
 public class CalculatorGbceAllShareIndex extends Calculator<CollectionOfTrades, Double> {
 

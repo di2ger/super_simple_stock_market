@@ -1,17 +1,17 @@
-package com.company.stock.super_simple_stock_market;
+package com.company.stock.market;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.company.stock.super_simple_stock_market.engine.Engine;
-import com.company.stock.super_simple_stock_market.engine.calculators.Calculator;
-import com.company.stock.super_simple_stock_market.engine.calculators.CalculatorDividendYield;
-import com.company.stock.super_simple_stock_market.engine.calculators.CalculatorGbceAllShareIndex;
-import com.company.stock.super_simple_stock_market.engine.calculators.CalculatorPeRatio;
-import com.company.stock.super_simple_stock_market.engine.calculators.CalculatorVolumeWeightedStockPrice;
-import com.company.stock.super_simple_stock_market.engine.data_types.CollectionOfTrades;
-import com.company.stock.super_simple_stock_market.engine.data_types.StockAndCollectionOfTradesAndInterval;
-import com.company.stock.super_simple_stock_market.engine.data_types.StockAndPrice;
+import com.company.stock.market.engine.Engine;
+import com.company.stock.market.engine.calculators.Calculator;
+import com.company.stock.market.engine.calculators.CalculatorDividendYield;
+import com.company.stock.market.engine.calculators.CalculatorGbceAllShareIndex;
+import com.company.stock.market.engine.calculators.CalculatorPeRatio;
+import com.company.stock.market.engine.calculators.CalculatorVolumeWeightedStockPrice;
+import com.company.stock.market.engine.data_types.CollectionOfTrades;
+import com.company.stock.market.engine.data_types.StockAndCollectionOfTradesAndInterval;
+import com.company.stock.market.engine.data_types.StockAndPrice;
 
 @Configuration
 public class AppConfig {

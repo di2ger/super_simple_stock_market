@@ -1,4 +1,4 @@
-package com.company.stock.super_simple_stock_market;
+package com.company.stock.market;
 
 import java.util.Date;
 
@@ -15,15 +15,16 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import com.company.stock.super_simple_stock_market.engine.Engine;
-import com.company.stock.super_simple_stock_market.engine.data_types.CollectionOfTrades;
-import com.company.stock.super_simple_stock_market.engine.data_types.ResultData;
-import com.company.stock.super_simple_stock_market.engine.data_types.StockAndCollectionOfTradesAndInterval;
-import com.company.stock.super_simple_stock_market.engine.data_types.StockAndPrice;
-import com.company.stock.super_simple_stock_market.model.Stock;
-import com.company.stock.super_simple_stock_market.model.StockCommon;
-import com.company.stock.super_simple_stock_market.model.StockPreferred;
-import com.company.stock.super_simple_stock_market.model.Trade;
+import com.company.stock.market.AppConfig;
+import com.company.stock.market.engine.Engine;
+import com.company.stock.market.engine.data_types.CollectionOfTrades;
+import com.company.stock.market.engine.data_types.ResultData;
+import com.company.stock.market.engine.data_types.StockAndCollectionOfTradesAndInterval;
+import com.company.stock.market.engine.data_types.StockAndPrice;
+import com.company.stock.market.model.Stock;
+import com.company.stock.market.model.StockCommon;
+import com.company.stock.market.model.StockPreferred;
+import com.company.stock.market.model.Trade;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})

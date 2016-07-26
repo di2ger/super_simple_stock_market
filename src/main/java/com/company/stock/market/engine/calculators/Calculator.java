@@ -1,8 +1,8 @@
-package com.company.stock.super_simple_stock_market.engine.calculators;
+package com.company.stock.market.engine.calculators;
 
 import java.util.function.Function;
 
-import com.company.stock.super_simple_stock_market.engine.data_types.ResultData;
+import com.company.stock.market.engine.data_types.ResultData;
 
 public abstract class Calculator<I, O> implements Function<I, ResultData<O>> {
 
