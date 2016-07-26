@@ -45,8 +45,7 @@ public abstract class Calculator<I, O> implements Function<I, ResultData<O>> {
 		}
 	}
 	
-	public void throwIfNotPositive(Integer valueToCheck, String valueName) {
-		throwIfNull(valueToCheck, valueName);
+	public void throwIfNotPositive(long valueToCheck, String valueName) {
 		if (valueToCheck <= 0) {
 			throw new IllegalArgumentException(valueName + " is not positive");
 		}

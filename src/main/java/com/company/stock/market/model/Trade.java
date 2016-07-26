@@ -5,10 +5,10 @@ import java.util.Date;
 public class Trade {
 	private Stock stock;
 	private Date timestamp;
-	private Integer quantity;
-	private Boolean buyIndicator;
+	private long quantity;
+	private boolean buyIndicator;
 	// in pennies
-	private Integer price;
+	private long price;
 	
 	public Stock getStock() {
 		return stock;
@@ -22,25 +22,28 @@ public class Trade {
 	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
-	public Integer getQuantity() {
+	public long getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(long quantity) {
 		this.quantity = quantity;
 	}
 	public Boolean getBuyIndicator() {
 		return buyIndicator;
 	}
-	public void setBuyIndicator(Boolean buyIndicator) {
+	public void setBuyIndicator(boolean buyIndicator) {
 		this.buyIndicator = buyIndicator;
 	}
-	public Integer getPrice() {
+	public long getPrice() {
 		return price;
 	}
-	public void setPrice(Integer price) {
+	public void setPrice(long price) {
 		this.price = price;
 	}
-	
-	
+	@Override
+	public String toString() {
+		return "Trade [stock=" + stock + ", timestamp=" + timestamp + ", quantity=" + quantity + ", buyIndicator="
+				+ buyIndicator + ", price=" + price + "]";
+	}
 
 }
