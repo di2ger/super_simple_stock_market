@@ -18,8 +18,6 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import com.company.stock.market.engine.EngineImpl;
 import com.company.stock.market.engine.calculators.Calculator;
 import com.company.stock.market.engine.calculators.CalculatorDividend;
-import com.company.stock.market.engine.calculators.CalculatorPeRatio;
-import com.company.stock.market.engine.data.wrappers.StockAndPrice;
 import com.company.stock.market.model.Engine;
 import com.company.stock.market.model.Stock;
 import com.company.stock.market.model.StockType;
@@ -58,6 +56,4 @@ public class ConfigTest {
 			Assert.assertNotNull("CalculatorDividend is null for " + calculator.getKey(), calculator.getValue());
 		}
 	}
-	
-
 }
