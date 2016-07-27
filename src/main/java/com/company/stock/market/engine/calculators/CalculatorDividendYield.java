@@ -3,8 +3,6 @@ package com.company.stock.market.engine.calculators;
 import com.company.stock.market.engine.data.wrappers.StockAndPrice;
 import com.company.stock.market.model.ResultData;
 import com.company.stock.market.model.Stock;
-import com.company.stock.market.model.StockPreferred;
-import com.company.stock.market.model.StockType;
 
 public class CalculatorDividendYield extends Calculator<StockAndPrice, Double> {
 
