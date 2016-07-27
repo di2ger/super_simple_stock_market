@@ -15,7 +15,6 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import com.company.stock.market.engine.EngineImpl;
 import com.company.stock.market.model.Engine;
 import com.company.stock.market.model.ResultData;
 import com.company.stock.market.model.Stock;
@@ -122,6 +121,4 @@ public class EngineTest {
 				result.getErrorDescription());
 		Assert.assertEquals("Result is wrong", 1.0, result.getResult(), 1e-32);
 	}
-	
-
 }
