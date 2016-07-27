@@ -1,4 +1,4 @@
-package com.company.stock.market.model;
+package com.company.stock.market.api.model;
 
 import java.util.Date;
 

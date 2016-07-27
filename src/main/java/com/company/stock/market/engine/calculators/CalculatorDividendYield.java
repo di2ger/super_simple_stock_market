@@ -1,8 +1,8 @@
 package com.company.stock.market.engine.calculators;
 
+import com.company.stock.market.api.model.ResultData;
+import com.company.stock.market.api.model.Stock;
 import com.company.stock.market.engine.data.wrappers.StockAndPrice;
-import com.company.stock.market.model.ResultData;
-import com.company.stock.market.model.Stock;
 
 public class CalculatorDividendYield extends Calculator<StockAndPrice, Double> {
 

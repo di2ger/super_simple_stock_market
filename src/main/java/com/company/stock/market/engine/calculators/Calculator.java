@@ -2,7 +2,7 @@ package com.company.stock.market.engine.calculators;
 
 import java.util.function.Function;
 
-import com.company.stock.market.model.ResultData;
+import com.company.stock.market.api.model.ResultData;
 
 public abstract class Calculator<I, O> implements Function<I, ResultData<O>> {
 

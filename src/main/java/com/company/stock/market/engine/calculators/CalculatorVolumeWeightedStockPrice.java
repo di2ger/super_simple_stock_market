@@ -3,9 +3,9 @@ package com.company.stock.market.engine.calculators;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import com.company.stock.market.api.model.ResultData;
 import com.company.stock.market.engine.data.wrappers.PriceByQuantityAndQuantity;
 import com.company.stock.market.engine.data.wrappers.StockAndCollectionOfTradesAndInterval;
-import com.company.stock.market.model.ResultData;
 
 public class CalculatorVolumeWeightedStockPrice extends Calculator<StockAndCollectionOfTradesAndInterval, Double> {
 

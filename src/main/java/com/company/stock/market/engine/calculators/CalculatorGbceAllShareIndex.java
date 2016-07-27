@@ -3,10 +3,10 @@ package com.company.stock.market.engine.calculators;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import com.company.stock.market.api.model.ResultData;
+import com.company.stock.market.api.model.Stock;
 import com.company.stock.market.engine.data.wrappers.CollectionOfTrades;
 import com.company.stock.market.engine.data.wrappers.RunningSums;
-import com.company.stock.market.model.ResultData;
-import com.company.stock.market.model.Stock;
 
 public class CalculatorGbceAllShareIndex extends Calculator<CollectionOfTrades, Double> {
 

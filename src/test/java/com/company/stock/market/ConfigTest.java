@@ -15,12 +15,12 @@ import org.springframework.test.context.support.DependencyInjectionTestExecution
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import com.company.stock.market.api.model.Stock;
+import com.company.stock.market.api.model.StockType;
+import com.company.stock.market.api.service.Engine;
 import com.company.stock.market.engine.EngineImpl;
 import com.company.stock.market.engine.calculators.Calculator;
 import com.company.stock.market.engine.calculators.CalculatorDividend;
-import com.company.stock.market.model.Engine;
-import com.company.stock.market.model.Stock;
-import com.company.stock.market.model.StockType;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes={AppConfig.class})

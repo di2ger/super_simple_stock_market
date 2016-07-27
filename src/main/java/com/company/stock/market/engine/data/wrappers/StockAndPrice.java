@@ -1,6 +1,6 @@
 package com.company.stock.market.engine.data.wrappers;
 
-import com.company.stock.market.model.Stock;
+import com.company.stock.market.api.model.Stock;
 
 public class StockAndPrice {
 	private Stock stock;

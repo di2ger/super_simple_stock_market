@@ -2,7 +2,7 @@ package com.company.stock.market.engine.data.wrappers;
 
 import java.util.Collection;
 
-import com.company.stock.market.model.Trade;
+import com.company.stock.market.api.model.Trade;
 
 public class CollectionOfTrades {
 	private Collection<Trade> trades;

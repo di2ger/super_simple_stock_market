@@ -7,6 +7,8 @@ import java.util.Map;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import com.company.stock.market.api.model.Stock;
+import com.company.stock.market.api.model.StockType;
 import com.company.stock.market.engine.EngineImpl;
 import com.company.stock.market.engine.calculators.Calculator;
 import com.company.stock.market.engine.calculators.CalculatorDividend;
@@ -19,8 +21,6 @@ import com.company.stock.market.engine.calculators.CalculatorVolumeWeightedStock
 import com.company.stock.market.engine.data.wrappers.CollectionOfTrades;
 import com.company.stock.market.engine.data.wrappers.StockAndCollectionOfTradesAndInterval;
 import com.company.stock.market.engine.data.wrappers.StockAndPrice;
-import com.company.stock.market.model.Stock;
-import com.company.stock.market.model.StockType;
 
 @Configuration
 public class AppConfig {

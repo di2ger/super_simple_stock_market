@@ -1,7 +1,11 @@
-package com.company.stock.market.model;
+package com.company.stock.market.api.service;
 
 import java.util.Collection;
 import java.util.List;
+
+import com.company.stock.market.api.model.ResultData;
+import com.company.stock.market.api.model.Stock;
+import com.company.stock.market.api.model.Trade;
 
 public interface Engine {
 	// price in pennies
